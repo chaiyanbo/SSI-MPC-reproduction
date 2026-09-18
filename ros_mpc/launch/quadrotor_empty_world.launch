@@ -16,6 +16,8 @@
   <arg name="log_file" default="$(arg mav_name)" />
   <arg name="paused" value="false"/>
   <arg name="gui" default="true"/>
+  <arg name="rviz" default="true"/>
+  <arg name="rqt_gui" default="true"/>
   <arg name="use_ground_truth" value="true"/>
   <arg name="verbose" default="false"/>
   <arg name="debug" default="false"/>
@@ -26,6 +28,8 @@
     <arg name="world_name" value="$(arg world_name)"/>
     <arg name="paused" value="$(arg paused)"/>
     <arg name="gui" value="$(arg gui)"/>
+    <arg name="rviz" value="$(arg rviz)"/>
+    <arg name="rqt_gui" value="$(arg rqt_gui)"/>
     <arg name="use_ground_truth" value="$(arg use_ground_truth)"/>
     <arg name="use_mpc" value="$(arg use_mpc)"/>
     <arg name="enable_command_feedthrough" value="$(arg enable_command_feedthrough)" />

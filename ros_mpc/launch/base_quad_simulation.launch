@@ -5,6 +5,8 @@
   <arg name="world_name"/>
   <arg name="paused"/>
   <arg name="gui"/>
+  <arg name="rviz" default="true"/>
+  <arg name="rqt_gui" default="true"/>
   <arg name="use_ground_truth"/>
   <arg name="use_mpc" default="false"/>
   <arg name="enable_command_feedthrough" default="false"/>
@@ -48,7 +50,7 @@
     </include>
 
     <!--launch rviz-->
-    <node name="rviz" pkg="rviz" type="rviz" respawn="false" args="-d $(find ros_mpc)/launch/simulator.rviz"/>
+    <node if="$(arg rviz)" name="rviz" pkg="rviz" type="rviz" respawn="false" args="-d $(find ros_mpc)/launch/simulator.rviz"/>
     <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" />
     <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" />    
   </group>
@@ -147,7 +149,7 @@
       <rosparam file="$(find rpg_rotors_interface)/parameters/manual_flight_assistant.yaml"/>
     </node>
 
-    <node name="rqt_quad_gui" pkg="rqt_gui" type="rqt_gui" 
+    <node if="$(arg rqt_gui)" name="rqt_quad_gui" pkg="rqt_gui" type="rqt_gui"
         args="-s rqt_quad_gui.basic_flight.BasicFlight --args 
         --quad_name $(arg quad_name)" output="screen"/>
 
