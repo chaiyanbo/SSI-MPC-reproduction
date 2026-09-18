@@ -11,7 +11,7 @@ setup(
     author_email='zhouhy@umich.edu',
 
     packages=find_packages(exclude=[]),
-    python_requires='==3.8',
+    python_requires='>=3.8,<3.9',
     install_requires=[
         'numpy==1.23.5',
         'Cython==0.29.37',
