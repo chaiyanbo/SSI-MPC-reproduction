@@ -25,6 +25,7 @@
     <arg name="heuristic" default="False"/>
     <arg name="kernel" default="Gaussian"/>
     <arg name="kernel_std" default="0.01"/>
+    <arg name="random_seed" default="-1"/>
 
     <!-- MPC -->
     <node pkg="ros_mpc" type="mpc_node.py" name="mpc_wrapper" output="screen">
@@ -44,6 +45,7 @@
         <param name="heuristic" value="$(arg heuristic)"/>
         <param name="kernel" value="$(arg kernel)"/>
         <param name="kernel_std" value="$(arg kernel_std)"/>
+        <param name="random_seed" value="$(arg random_seed)"/>
     </node>
 
     <!-- Trajectory generator -->

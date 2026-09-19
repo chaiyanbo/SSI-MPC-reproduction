@@ -91,6 +91,12 @@ class MPCWrapper:
         self.heuristic = rospy.get_param('~heuristic', default=False)
         self.kernel = rospy.get_param('~kernel', default='Gaussian')
         self.kernel_std = rospy.get_param('~kernel_std', default=0.1)
+        self.random_seed = int(rospy.get_param('~random_seed', default=-1))
+        if self.random_seed >= 0:
+            self.random_state = np.random.RandomState(self.random_seed)
+            rospy.loginfo("Random feature seed: %i." % self.random_seed)
+        else:
+            self.random_state = np.random
         if self.n_rf > 0:
             rospy.loginfo("Using random features. n_rf: %i, lr: %.2f, Gaussian kernel_std: %.2f." 
                             % (self.n_rf, self.lr, self.kernel_std))
@@ -263,15 +269,15 @@ class MPCWrapper:
         Ref: Ali Rahimi, Benjamin Recht. Random features for large-scale kernel machines. NIPS 2007.
         '''
         if self.kernel == 'Gaussian':
-            self.omega = np.random.normal(loc=0.0, scale=self.kernel_std, size=(self.n_rf, (len(self.input_mask))))
+            self.omega = self.random_state.normal(loc=0.0, scale=self.kernel_std, size=(self.n_rf, (len(self.input_mask))))
         elif self.kernel == 'Laplace':
-            self.omega = np.random.standard_cauchy(size=(self.n_rf, (len(self.input_mask))))
+            self.omega = self.random_state.standard_cauchy(size=(self.n_rf, (len(self.input_mask))))
         elif self.kernel == 'Cauchy':
-            self.omega = np.random.laplace(loc=0.0, scale=1.0, size=(self.n_rf, (len(self.input_mask))))
+            self.omega = self.random_state.laplace(loc=0.0, scale=1.0, size=(self.n_rf, (len(self.input_mask))))
         else:
             raise ValueError('Only Gaussian, Laplace, and Cauchy kernels are supported.')
 
-        self.b = np.random.uniform(low=0.0, high=2*np.pi, size=(self.n_rf, 1))
+        self.b = self.random_state.uniform(low=0.0, high=2*np.pi, size=(self.n_rf, 1))
 
     def run_mpc(self, odom, recording=True):
         """
