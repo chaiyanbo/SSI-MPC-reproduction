@@ -60,7 +60,7 @@
 
     <group if="$(arg use_ground_truth)">
       <node pkg="rpg_rotors_interface" type="rpg_rotors_interface" 
-          name="rpg_rotors_interface" output="screen" >
+          name="rpg_rotors_interface" output="screen" respawn="true" respawn_delay="2.0">
         <rosparam file="$(find rpg_rotors_interface)/parameters/rpg_rotors_interface.yaml" />
         
         <remap from="odometry" to="ground_truth/odometry" />
@@ -102,7 +102,7 @@
 
     <group unless="$(arg use_ground_truth)">
       <node pkg="rpg_rotors_interface" type="rpg_rotors_interface" 
-          name="rpg_rotors_interface" output="screen" >
+          name="rpg_rotors_interface" output="screen" respawn="true" respawn_delay="2.0">
         <rosparam file="$(find rpg_rotors_interface)/parameters/rpg_rotors_interface.yaml" />
 
         <remap from="odometry" to="odometry_sensor1/odometry" />
