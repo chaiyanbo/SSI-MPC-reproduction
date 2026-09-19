@@ -10,6 +10,7 @@
     <!-- Reference trajectory parameters -->
     <arg name="n_seeds" default="1"/> <!-- How many random seeds to use to generate trajectories -->
     <arg name="plot" default="false"/>
+    <arg name="run_reference_generator" default="true"/>
 
     <!-- Stable version: Use time horizon of 1 second, 10 control nodes and control @ 50 Hz (control_freq_factor=5) -->
     <arg name="t_horizon" default="1"/>
@@ -46,7 +47,7 @@
     </node>
 
     <!-- Trajectory generator -->
-    <node pkg="ros_mpc" type="reference_publisher_node.py" name="ref_gen" output="screen">
+    <node if="$(arg run_reference_generator)" pkg="ros_mpc" type="reference_publisher_node.py" name="ref_gen" output="screen">
         <rosparam file="$(find ros_mpc)/config/simulation_run.yaml"/>
 
         <rosparam file="$(find ros_mpc)/config/traj_circle.yaml"/>

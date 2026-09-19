@@ -1,4 +1,4 @@
-#!/usr/bin/env python3.8
+#!/usr/bin/env python3
 """ Node wrapper for publishing trajectories for the MPC pipeline to track.
 
 This program is free software: you can redistribute it and/or modify it under
