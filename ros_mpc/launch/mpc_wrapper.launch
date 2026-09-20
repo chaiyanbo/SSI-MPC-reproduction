@@ -5,6 +5,7 @@
 
     <!-- Recording parameters -->
     <arg name="recording" default="false"/>
+    <arg name="save_data" default="false"/>
     <arg name="overwrite" default="true"/>
 
     <!-- Reference trajectory parameters -->
@@ -32,6 +33,7 @@
         <rosparam file="$(find ros_mpc)/config/simulation_run.yaml"/>
 
         <param name="recording" value="$(arg recording)"/>
+        <param name="save_data" value="$(arg save_data)"/>
         <param name="overwrite" value="$(arg overwrite)"/>
 
         <param name="plot" value="$(arg plot)"/>
