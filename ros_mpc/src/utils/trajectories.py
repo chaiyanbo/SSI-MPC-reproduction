@@ -397,6 +397,11 @@ def loop_trajectory(quad, discretization_dt, radius, z, lin_acc, clockwise, yawi
     ramp_up_alpha = alpha_acc * np.sin(np.pi / (2 * ramp_up_t) * ramp_t_vec) ** 2
     # Acceleration phase
     coasting_duration = (t_total - 4 * ramp_up_t) / 2
+    if coasting_duration <= 0.0:
+        raise ValueError(
+            "v_max must be greater than lin_acc * ramp_up_t "
+            f"({lin_acc * ramp_up_t}) for this trajectory"
+        )
     coasting_t_vec = ramp_up_t + np.arange(0, coasting_duration, discretization_dt)
     coasting_alpha = np.ones_like(coasting_t_vec) * alpha_acc
     # Transition phase: decelerate
@@ -507,6 +512,11 @@ def tilted_loop_trajectory(quad, discretization_dt, radius, z, lin_acc, clockwis
     ramp_up_alpha = alpha_acc * np.sin(np.pi / (2 * ramp_up_t) * ramp_t_vec) ** 2
     # Acceleration phase
     coasting_duration = (t_total - 4 * ramp_up_t) / 2
+    if coasting_duration <= 0.0:
+        raise ValueError(
+            "v_max must be greater than lin_acc * ramp_up_t "
+            f"({lin_acc * ramp_up_t}) for this trajectory"
+        )
     coasting_t_vec = ramp_up_t + np.arange(0, coasting_duration, discretization_dt)
     coasting_alpha = np.ones_like(coasting_t_vec) * alpha_acc
     # Transition phase: decelerate
@@ -620,6 +630,11 @@ def wraped_loop_trajectory(quad, discretization_dt, radius, z, lin_acc, clockwis
     ramp_up_alpha = alpha_acc * np.sin(np.pi / (2 * ramp_up_t) * ramp_t_vec) ** 2
     # Acceleration phase
     coasting_duration = (t_total - 4 * ramp_up_t) / 2
+    if coasting_duration <= 0.0:
+        raise ValueError(
+            "v_max must be greater than lin_acc * ramp_up_t "
+            f"({lin_acc * ramp_up_t}) for this trajectory"
+        )
     coasting_t_vec = ramp_up_t + np.arange(0, coasting_duration, discretization_dt)
     coasting_alpha = np.ones_like(coasting_t_vec) * alpha_acc
     # Transition phase: decelerate
@@ -733,6 +748,11 @@ def lemniscate_trajectory(quad, discretization_dt, radius, z, lin_acc, clockwise
     ramp_up_alpha = alpha_acc * np.sin(np.pi / (2 * ramp_up_t) * ramp_t_vec) ** 2
     # Acceleration phase
     coasting_duration = (t_total - 4 * ramp_up_t) / 2
+    if coasting_duration <= 0.0:
+        raise ValueError(
+            "v_max must be greater than lin_acc * ramp_up_t "
+            f"({lin_acc * ramp_up_t}) for this trajectory"
+        )
     coasting_t_vec = ramp_up_t + np.arange(0, coasting_duration, discretization_dt)
     coasting_alpha = np.ones_like(coasting_t_vec) * alpha_acc
     # Transition phase: decelerate
@@ -829,6 +849,11 @@ def wraped_lemniscate_trajectory(quad, discretization_dt, radius, z, lin_acc, cl
     ramp_up_alpha = alpha_acc * np.sin(np.pi / (2 * ramp_up_t) * ramp_t_vec) ** 2
     # Acceleration phase
     coasting_duration = (t_total - 4 * ramp_up_t) / 2
+    if coasting_duration <= 0.0:
+        raise ValueError(
+            "v_max must be greater than lin_acc * ramp_up_t "
+            f"({lin_acc * ramp_up_t}) for this trajectory"
+        )
     coasting_t_vec = ramp_up_t + np.arange(0, coasting_duration, discretization_dt)
     coasting_alpha = np.ones_like(coasting_t_vec) * alpha_acc
     # Transition phase: decelerate

@@ -581,6 +581,19 @@ class MPCWrapper:
                     if self.save_data:
                         data_dic = {"ref_time": executed_t_ref, "ref_x": executed_x_ref, "ref_u": executed_u_ref, 
                                     "x": self.quad_trajectory, "u": self.quad_controls, "w_control": self.w_control}
+                        data_dic.update({
+                            "project_mean_distance_m": np.array([[rmse]], dtype=float),
+                            "mean_optimization_time_s": np.array([[self.optimization_dt]], dtype=float),
+                            "n_random_features": np.array([[self.n_rf]], dtype=np.int32),
+                            "learning_rate": np.array([[self.lr]], dtype=float),
+                            "kernel": self.kernel,
+                            "kernel_std": np.array([[self.kernel_std]], dtype=float),
+                            "heuristic": np.array([[self.heuristic]], dtype=bool),
+                            "random_seed": np.array([[self.random_seed]], dtype=np.int32),
+                            "trajectory_name": self.ref_traj_name,
+                            "reference_speed_mps": np.array([[self.ref_v]], dtype=float),
+                            "metric_definition": "mean_euclidean_position_error",
+                        })
                         if self.n_rf > 0:
                             data_file = os.path.join(self.data_dir, 'OLMPC_'+self.ref_traj_name+'_'+str(self.ref_v)+'.mat')
                         else:
